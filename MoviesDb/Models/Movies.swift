@@ -14,4 +14,6 @@ struct Movies : Codable{
     let Plot : String?
     let Genre : String?
     let Director : String?
+    let Actors : String?
+    let imdbRating : String?
 }

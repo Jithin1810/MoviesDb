@@ -35,7 +35,13 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
         
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: - push detail page
+        let selectedMovie = movieViewModel.modelAt(indexPath.row)
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                guard let detailsVc = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+                    return
+                }
+        detailsVc.movieDetailModel = MovieDetailsViewModel(delegate: detailsVc, selectedMovie: selectedMovie)
+                self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     
 
