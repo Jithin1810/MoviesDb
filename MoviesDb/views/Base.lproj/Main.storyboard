@@ -43,22 +43,30 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="g5F-VV-TjG">
-                                                    <rect key="frame" x="132" y="0.0" width="201" height="54.666666666666664"/>
+                                                    <rect key="frame" x="132" y="0.0" width="94.666666666666686" height="54.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Movie Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EB-vA-8ff">
-                                                            <rect key="frame" x="0.0" y="0.0" width="201" height="20.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Czd-wh-JNE">
-                                                            <rect key="frame" x="0.0" y="34.333333333333336" width="201" height="20.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="34.333333333333336" width="94.666666666666671" height="20.333333333333336"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1P-3J-wBz">
+                                                    <rect key="frame" x="238.66666666666671" y="0.0" width="94.333333333333343" height="22"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="heart" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="favouriteButtonPressed:" destination="stJ-p7-Xf6" eventType="touchUpInside" id="q2B-WM-Cn2"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </stackView>
                                     </subviews>
@@ -70,6 +78,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="favouriteButton" destination="g1P-3J-wBz" id="FQU-MN-xdg"/>
                                     <outlet property="movieNameLabel" destination="2EB-vA-8ff" id="H3q-i6-zrt"/>
                                     <outlet property="posterImageView" destination="1A5-K6-943" id="OgN-Nd-qtf"/>
                                     <outlet property="yearLabel" destination="Czd-wh-JNE" id="quS-hE-gPU"/>
@@ -296,6 +305,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

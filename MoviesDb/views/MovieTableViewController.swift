@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieTableViewController: UITableViewController, UISearchBarDelegate,MovieSearchManagerDelegate {
+class MovieTableViewController: UITableViewController, UISearchBarDelegate,MovieSearchManagerDelegate,CellDelegate {
      
     @IBOutlet weak var searchBar: UISearchBar!
     var movieViewModel: MovieSearchViewModel!
@@ -30,7 +30,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! MoviesTableViewCell
         let movie = movieViewModel.modelAt(indexPath.row)
-        cell.configure(movie)
+        let isFavourite = movieViewModel.isFavourite(imdbId: movie.imdbID!)
+        cell.configure(movie,indexPath,isFavourite, delegate: self)
+        
         return cell
         
     }
@@ -44,18 +46,23 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
                 self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     
-
-
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-
     //MARK: - Search Box
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         starSearch()
     }
-    
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+          if searchText.isEmpty {
+              // Clear the table view data if the search text is empty
+              movieViewModel.clearAllResult()
+              tableView.reloadData()
+          } 
+        // for lessthan 3 chanarcter api will return nill.
+        else if searchText.count > 2{
+              // Update the table view data based on the search text
+              movieViewModel.featchMovie(movieName: searchText)
+          }
+      }
+
     func starSearch(){
         guard let title = searchBar.text else{
             return
@@ -72,7 +79,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
         }
     }
     
-    
     //MARK: - Update Movie
     func didUpdateMovie() {
         DispatchQueue.main.async {
@@ -86,5 +92,14 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
         }
+    }
+    
+    
+    //MARK: - Favourite
+    
+    func toggleFavourite(_ indexPath : IndexPath) {
+        let movie = movieViewModel.modelAt(indexPath.row)
+        self.movieViewModel.toggleFavourite(for: movie.imdbID!)
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

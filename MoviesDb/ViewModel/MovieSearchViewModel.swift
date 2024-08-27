@@ -19,10 +19,13 @@ class MovieSearchViewModel {
     var delegate: MovieSearchManagerDelegate?
     var moviesArray = [Movies]()
     
+    var favouriteService = FavoritesService()
+    
     func featchMovie(movieName: String){
         let urlString = "\(movieUrl)?s=\(movieName)\(apiKey)"
         performRequest(urlString: urlString)
     }
+    
     func performRequest(urlString: String){
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
@@ -40,14 +43,16 @@ class MovieSearchViewModel {
             task.resume()
         }
     }
+    
+    //parsing the data
     func parseJson(_ movieData : Data) -> [Movies]?{
         let decoder = JSONDecoder()
         do{
             let decodeData = try decoder.decode(SearchMoviesResponseModel.self, from: movieData)
             return decodeData.Search
         }catch{
-            self.delegate?.didFailWithError(error)
-            return nil
+            //self.delegate?.didFailWithError(error)
+            return []
         }
     }
     func movieCount() -> Int{
@@ -55,5 +60,25 @@ class MovieSearchViewModel {
     }
     func modelAt(_ index : Int) -> Movies {
         return moviesArray[index]
+    }
+    func clearAllResult(){
+        moviesArray.removeAll()
+    }
+    
+    
+    func toggleFavourite(for imdbId : String ){
+        if isFavourite(imdbId: imdbId){
+            favouriteService.removeFavorite(imdbID: imdbId)
+        }else{
+            let movie = moviesArray.first { $0.imdbID == imdbId }
+            if let movie = movie{
+                favouriteService.saveFavorite(movie: movie)
+            }
+        }
+    }
+    func isFavourite(imdbId : String) -> Bool{
+        let favorite = favouriteService.loadFavorites()
+        return favorite.contains(where: { $0.imdbID == imdbId })
+        
     }
 }

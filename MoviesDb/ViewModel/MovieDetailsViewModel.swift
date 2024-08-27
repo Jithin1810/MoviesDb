@@ -25,7 +25,6 @@ class MovieDetailsViewModel{
     
     func featchMovie(){
         let urlString = "\(movieUrl)?t=\(selectedMovie.Title!)\(apiKey)"
-        print(urlString)
         performRequest(urlString: urlString)
     }
     func performRequest(urlString: String){

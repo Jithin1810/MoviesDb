@@ -16,4 +16,5 @@ struct Movies : Codable{
     let Director : String?
     let Actors : String?
     let imdbRating : String?
+    let imdbID : String?
 }

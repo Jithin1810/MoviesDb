@@ -41,7 +41,6 @@ extension DetailViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableView", for: indexPath) as! DetailTableViewCell
-        let movie = movieDetailModel.modelAt(indexPath.row)
         cell.configure(movieDetailModel.selectedMovie)
         cell.selectionStyle = .none
         return cell

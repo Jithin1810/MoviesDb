@@ -20,6 +20,7 @@
 		5DD9E9FE2C7D8FE400A4D420 /* SearchMoviesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9E9FD2C7D8FE400A4D420 /* SearchMoviesResponseModel.swift */; };
 		5DD9EA002C7D930700A4D420 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9E9FF2C7D930700A4D420 /* MovieDetailsViewModel.swift */; };
 		5DD9EA022C7DA99200A4D420 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9EA012C7DA99200A4D420 /* DetailTableViewCell.swift */; };
+		5DD9EA042C7E048A00A4D420 /* favouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD9EA032C7E048A00A4D420 /* favouriteService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5DD9E9FD2C7D8FE400A4D420 /* SearchMoviesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesResponseModel.swift; sourceTree = "<group>"; };
 		5DD9E9FF2C7D930700A4D420 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		5DD9EA012C7DA99200A4D420 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		5DD9EA032C7E048A00A4D420 /* favouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				5DD9E9F22C7A0F0200A4D420 /* Movies.swift */,
 				5DD9E9FD2C7D8FE400A4D420 /* SearchMoviesResponseModel.swift */,
+				5DD9EA032C7E048A00A4D420 /* favouriteService.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DD9EA042C7E048A00A4D420 /* favouriteService.swift in Sources */,
 				5DD9E9F32C7A0F0200A4D420 /* Movies.swift in Sources */,
 				5DD9E9EE2C78F10500A4D420 /* MovieTableViewController.swift in Sources */,
 				5DD9E9F62C7A169D00A4D420 /* MoviesTableViewCell.swift in Sources */,
