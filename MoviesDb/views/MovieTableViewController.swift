@@ -121,6 +121,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
         let movie = movieViewModel.modelAt(indexPath)
         self.movieViewModel.toggleFavourite(for: movie.imdbID!)
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        movieViewModel.loadFavoriteMovies()
     }
     @objc func dismissKeyboard() {
         // Resign the first responder from the active text field or text view
