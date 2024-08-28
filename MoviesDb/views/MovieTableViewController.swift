@@ -15,6 +15,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
     override func viewDidLoad() {
         super.viewDidLoad()
         movieViewModel = MovieSearchViewModel()
+        movieViewModel.network = NetworkManager()
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
@@ -42,7 +43,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate,Movie
                 guard let detailsVc = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
                     return
                 }
-        detailsVc.movieDetailModel = MovieDetailsViewModel(delegate: detailsVc, selectedMovie: selectedMovie)
+        detailsVc.movieDetailModel = MovieDetailsViewModel(delegate: detailsVc, selectedMovie: selectedMovie, network: NetworkManager())
                 self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     

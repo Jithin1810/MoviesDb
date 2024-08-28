@@ -13,16 +13,17 @@ protocol MovieDetailsManagerDelegate{
 }
 
 class MovieDetailsViewModel{
-    init(delegate: MovieDetailsManagerDelegate? = nil, selectedMovie: Movies!) {
-        self.delegate = delegate
-        self.selectedMovie = selectedMovie
-    }
+
     let movieUrl = "https://www.omdbapi.com/"
     let apiKey = "&apikey=3940df7"
-    
     var delegate: MovieDetailsManagerDelegate?
-    var selectedMovie : Movies!
-    
+    var selectedMovie : Movies
+    var network : NetworkingClient
+    init(delegate: MovieDetailsManagerDelegate? = nil, selectedMovie: Movies, network : NetworkingClient) {
+        self.delegate = delegate
+        self.selectedMovie = selectedMovie
+        self.network = network
+    }
     func featchMovie(){
         let urlString = "\(movieUrl)?t=\(selectedMovie.Title!)\(apiKey)"
         performRequest(urlString: urlString)
@@ -30,9 +31,7 @@ class MovieDetailsViewModel{
     func performRequest(urlString: String){
         if let url = URL(string: urlString){
             
-            let session = URLSession(configuration: .default)
-            
-            let task = session.dataTask(with: url) { [weak self]data, url, error in
+            network.request(url: url) { [weak self]data,error in
                 if error != nil {
                     self?.delegate?.didFailWithError(error!)
                 }
@@ -43,7 +42,6 @@ class MovieDetailsViewModel{
                     }
                 }
             }
-            task.resume()
         }
     }
     func parseJson(_ movieData : Data) -> Movies?{

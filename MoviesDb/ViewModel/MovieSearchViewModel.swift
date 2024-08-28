@@ -12,6 +12,7 @@ protocol MovieSearchManagerDelegate {
 }
 
 
+
 class MovieSearchViewModel {
     let movieUrl = "https://www.omdbapi.com/"
     let apiKey = "&apikey=3940df7"
@@ -20,6 +21,7 @@ class MovieSearchViewModel {
     var moviesArray = [Movies]()
     
     var favouriteService = FavoritesService()
+    var network: NetworkingClient!
     
     func featchMovie(movieName: String){
         let urlString = "\(movieUrl)?s=\(movieName)\(apiKey)"
@@ -28,19 +30,19 @@ class MovieSearchViewModel {
     
     func performRequest(urlString: String){
         if let url = URL(string: urlString){
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { [ weak self] data, url, error in
-                if error != nil {
-                    self?.delegate?.didFailWithError(error!)
+            network.request(url: url) {[weak self] data, error in
+                if let error = error {
+                    self?.delegate?.didFailWithError(error)
+                    return
                 }
-                if let safeData = data{
+                
+                if let safeData = data {
                     if let movie = self?.parseJson(safeData){
                         self?.moviesArray = movie
                         self?.delegate?.didUpdateMovie()
                     }
                 }
             }
-            task.resume()
         }
     }
     
@@ -55,6 +57,7 @@ class MovieSearchViewModel {
             return []
         }
     }
+    
     func movieCount() -> Int{
         return moviesArray.count
     }
