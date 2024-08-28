@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movie Table View Controller-->
+        <!--SEARCH MOVIE-->
         <scene sceneID="c3o-Ho-w6k">
             <objects>
                 <tableViewController id="tks-D0-bj4" customClass="MovieTableViewController" customModule="MoviesDb" customModuleProvider="target" sceneMemberID="viewController">
@@ -90,7 +90,7 @@
                             <outlet property="delegate" destination="tks-D0-bj4" id="mnA-ec-7ck"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yr1-f4-YVu"/>
+                    <navigationItem key="navigationItem" title="SEARCH MOVIE" id="yr1-f4-YVu"/>
                     <connections>
                         <outlet property="searchBar" destination="ncz-gS-jGL" id="D6N-cw-kSi"/>
                     </connections>
@@ -293,6 +293,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YLI-OU-gJv">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBarAppearance key="standardAppearance" backgroundEffect="regular"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

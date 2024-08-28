@@ -61,6 +61,7 @@
 		5DD9EA162C7E2B0500A4D420 /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		5DD9EA182C7EC99F00A4D420 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5DD9EA1A2C7ED3B000A4D420 /* MovieDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		5DD9EA1C2C7F842F00A4D420 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 		5D59B1102C78BBBC006A0CC4 /* MoviesDb */ = {
 			isa = PBXGroup;
 			children = (
+				5DD9EA1C2C7F842F00A4D420 /* ReadMe.md */,
 				5DD9E9F72C7AD64200A4D420 /* Networking */,
 				5DD9E9FA2C7D845600A4D420 /* ViewModel */,
 				5DD9E9F42C7A166100A4D420 /* views */,

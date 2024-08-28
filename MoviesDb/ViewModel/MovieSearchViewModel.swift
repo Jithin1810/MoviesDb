@@ -18,7 +18,11 @@ class MovieSearchViewModel {
     let apiKey = "&apikey=3940df7"
     
     var delegate: MovieSearchManagerDelegate?
-    var moviesArray = [Movies]()
+    //var moviesArray = [Movies]()
+    
+    let sectionstitles = ["Search Results","Favorite Movies"]
+    var favoriteMovies = [Movies]()
+    var searchResults = [Movies]()
     
     var favouriteService = FavoritesService()
     var network: NetworkingClient!
@@ -38,7 +42,7 @@ class MovieSearchViewModel {
                 
                 if let safeData = data {
                     if let movie = self?.parseJson(safeData){
-                        self?.moviesArray = movie
+                        self?.searchResults = movie
                         self?.delegate?.didUpdateMovie()
                     }
                 }
@@ -53,27 +57,39 @@ class MovieSearchViewModel {
             let decodeData = try decoder.decode(SearchMoviesResponseModel.self, from: movieData)
             return decodeData.Search
         }catch{
-            //self.delegate?.didFailWithError(error)
             return []
         }
     }
     
     func movieCount() -> Int{
-        return moviesArray.count
+        return searchResults.count
     }
-    func modelAt(_ index : Int) -> Movies {
-        return moviesArray[index]
+    func modelAt(_ index : IndexPath) -> Movies {
+        switch index.section {
+               case 0:
+                   return searchResults[index.row]
+               case 1:
+                   return favoriteMovies[index.row]
+               default:
+                   fatalError("Unexpected section")
+               }
     }
     func clearAllResult(){
-        moviesArray.removeAll()
+        searchResults.removeAll()
     }
     
+    //for displaying favourite movies
+    func loadFavoriteMovies() {
+        let favoriteMovies = favouriteService.loadFavorites()
+        self.favoriteMovies = favoriteMovies
+        delegate?.didUpdateMovie()
+    }
     
     func toggleFavourite(for imdbId : String ){
         if isFavourite(imdbId: imdbId){
             favouriteService.removeFavorite(imdbID: imdbId)
         }else{
-            let movie = moviesArray.first { $0.imdbID == imdbId }
+            let movie = searchResults.first { $0.imdbID == imdbId }
             if let movie = movie{
                 favouriteService.saveFavorite(movie: movie)
             }
